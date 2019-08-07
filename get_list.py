@@ -1,22 +1,35 @@
 import os
-
-xml_path = './RoLabelImg_Transform/xml/'
-txt_list_path = './RoLabelImg_Transform/xml_to_txt_list.txt'
-
-dir_list = [dir for dir in os.listdir(xml_path) if dir.split('.')[1] == 'xml']
-
-with open(txt_list_path, 'w') as fw:
-    for dir in dir_list:
-        fw.write(dir)
-        fw.write('\n')
+import argparse
 
 
-# txt_path = './RoLabelImg_Transform/txt/'
-# txt_list_path = './RoLabelImg_Transform/txt_to_xml_list.txt'
+parser = argparse.ArgumentParser(description="DeepLab-ResNet Network")
+parser.add_argument("--model", type=str, default='txt_to_xml', help="")
+parser.add_argument("--input_path", type=str, default='./RoLabelImg_Transform/txt/', help="")
+args = parser.parse_args()
 
-# dir_list = [dir for dir in os.listdir(txt_path) if dir.split('.')[1] == 'txt']
 
-# with open(txt_list_path, 'w') as fw:
-#     for dir in dir_list:
-#         fw.write(dir)
-#         fw.write('\n')
+if args.model == 'txt_to_xml':
+    txt_path = args.input_path
+    txt_list_path = './RoLabelImg_Transform/{}_list.txt'.format(args.model)
+
+    dir_list = [dir for dir in os.listdir(txt_path) if dir.split('.')[1] == 'txt']
+
+    with open(txt_list_path, 'w') as fw:
+        for dir in dir_list:
+            fw.write(dir)
+            fw.write('\n')
+
+elif args.model == 'xml_to_txt':
+    xml_path = args.input_path
+    txt_list_path = './RoLabelImg_Transform/{}_list.txt'.format(args.model)
+
+    dir_list = [dir for dir in os.listdir(xml_path) if dir.split('.')[1] == 'xml']
+
+    with open(txt_list_path, 'w') as fw:
+        for dir in dir_list:
+            fw.write(dir)
+            fw.write('\n')
+
+else:
+    raise ValueError("model only txt_to_xml and xml_to_txt")
+

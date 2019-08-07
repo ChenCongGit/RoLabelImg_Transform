@@ -53,16 +53,22 @@ y4 = cy+h/2*cos(theta)+w/2*sin(theta)
 其中theta与角度angle有关，当angle小于pi/2时，theta等于angle，当angle大于pi/2时，theta等于angle-pi。
 
 ## 代码程序
+### 准备环境
+该程序需要以下依赖包:
+ - python3.6
+ - opencv-python 4.1.0.25
+ - lxml 4.4.0
+
 ### txt转xml
-将需要转换的图像文件放入`img`文件夹(不是必须的，可以用于可视化)，txt检测框文件放入`txt`文件，运行`get_list.py`中的第二部分得到转换列表`txt_to_xml_list.txt`，然后运行`txt_to_xml.py`，在`xml`文件夹中得到同名的xml格式标签文件
+将需要转换的图像文件放入`img`文件夹，txt检测框文件放入`txt`文件夹，运行`get_list.py`得到转换列表`txt_to_xml_list.txt`，然后运行`txt_to_xml.py`，在`xml`文件夹中得到同名的xml格式标签文件
 ```
-python RoLabelImg_Transform/get_list.py
+python RoLabelImg_Transform/get_list.py --model='txt_to_xml' --input_path='./RoLabelImg_Transform/txt/'
 python RoLabelImg_Transform/txt_to_xml.py
 ```
 ### xml转txt
-将需要转换的图像文件放入`img`文件夹(不是必须的，可以用于可视化)，xml检测框文件放入`xml`文件，运行`get_list.py`中的第一部分得到转换列表`xml_to_txt_list.txt`，然后运行`xml_to_txt.py`，在`txt`文件夹中得到同名的txt格式标签文件
+将需要转换的图像文件放入`img`文件夹，xml检测框文件放入`xml`文件夹，运行`get_list.py`得到转换列表`xml_to_txt_list.txt`，然后运行`xml_to_txt.py`，在`txt`文件夹中得到同名的txt格式标签文件
 ```
-python RoLabelImg_Transform/get_list.py
+python RoLabelImg_Transform/get_list.py --model='xml_to_txt' --input_path='./RoLabelImg_Transform/xml/'
 python RoLabelImg_Transform/xml_to_txt.py
 ```
 
